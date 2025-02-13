@@ -1,0 +1,4 @@
+docxtpl
+pandas
+docxtpl
+pypandoc
