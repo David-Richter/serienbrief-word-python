@@ -104,12 +104,12 @@ def main():
         value="Dokument_{Nachname}_{Vorname}"
     )
 
-    # 4) DOCX/PDF-Auswahl
-    st.subheader("4) Welche Dokumente sollen erzeugt werden?")
-    doc_type_option = st.radio(
-        "Dokumenten-Typ wählen",
-        ["Nur DOCX", "Nur PDF", "DOCX und PDF"]
-    )
+    # # 4) DOCX/PDF-Auswahl
+    # st.subheader("4) Welche Dokumente sollen erzeugt werden?")
+    # doc_type_option = st.radio(
+    #     "Dokumenten-Typ wählen",
+    #     ["Nur DOCX", "Nur PDF", "DOCX und PDF"]
+    # )
 
     if st.button("Dokumente generieren"):
         # Warnen, falls nichts hochgeladen wurde
@@ -144,15 +144,15 @@ def main():
                 docx_bytes = generate_doc(uploaded_template.getvalue(), context)
 
                 # "Nur DOCX" oder "DOCX und PDF" -> DOCX ins ZIP
-                if doc_type_option in ["Nur DOCX", "DOCX und PDF"]:
-                    docx_filename = f"{filename_prefix}.docx"
-                    zf.writestr(docx_filename, docx_bytes)
+                # if doc_type_option in ["Nur DOCX", "DOCX und PDF"]:
+                docx_filename = f"{filename_prefix}.docx"
+                zf.writestr(docx_filename, docx_bytes)
 
-                # "Nur PDF" oder "DOCX und PDF" -> DOCX -> PDF, PDF ins ZIP
-                if doc_type_option in ["Nur PDF", "DOCX und PDF"]:
-                    pdf_bytes = convert_docx_to_pdf(docx_bytes)
-                    pdf_filename = f"{filename_prefix}.pdf"
-                    zf.writestr(pdf_filename, pdf_bytes)
+                # # "Nur PDF" oder "DOCX und PDF" -> DOCX -> PDF, PDF ins ZIP
+                # if doc_type_option in ["Nur PDF", "DOCX und PDF"]:
+                #     pdf_bytes = convert_docx_to_pdf(docx_bytes)
+                #     pdf_filename = f"{filename_prefix}.pdf"
+                #     zf.writestr(pdf_filename, pdf_bytes)
 
         st.success("Dokumente erfolgreich generiert!")
         st.download_button(
